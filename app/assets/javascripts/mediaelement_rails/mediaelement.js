@@ -1012,9 +1012,10 @@ mejs.HtmlMediaElementShim = {
 
 			for (i=0; i<mediaFiles.length; i++) {
 				// normal check
-				if (htmlMediaElement.canPlayType(mediaFiles[i].type).replace(/no/, '') !== ''
+        // Change maybe to be no: http://stackoverflow.com/questions/11393050/google-chrome-does-not-want-to-play-mp4-using-mediaelement-js
+				if (htmlMediaElement.canPlayType(mediaFiles[i].type).replace(/no|maybe/, '') !== ''
 					// special case for Mac/Safari 5.0.3 which answers '' to canPlayType('audio/mp3') but 'maybe' to canPlayType('audio/mpeg')
-					|| htmlMediaElement.canPlayType(mediaFiles[i].type.replace(/mp3/,'mpeg')).replace(/no/, '') !== '') {
+					|| htmlMediaElement.canPlayType(mediaFiles[i].type.replace(/mp3/,'mpeg')).replace(/no|maybe/, '') !== '') {
 					result.method = 'native';
 					result.url = mediaFiles[i].url;
 					break;
